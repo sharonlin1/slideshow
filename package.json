@@ -2,6 +2,7 @@
   "name": "slideshow",
   "version": "1.0.0",
   "description": "jquery practice - slideshow",
+  "author": "Sharon Lin",
   "main": "gulpfile.js",
   "dependencies": {},
   "devDependencies": {
