@@ -19,9 +19,6 @@ ul > li > img {
   padding: 0;
   overflow: hidden;
 }
-.slideshow-list .active {
-  display: block;
-}
 .button {
   padding: 10px;
   border: 2px solid #ddd;

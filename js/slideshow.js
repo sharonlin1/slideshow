@@ -17,7 +17,6 @@
       this.btnPrev = $slideshow.find('.slideshow-btnPrev');
       this.btnNext = $slideshow.find('.slideshow-btnNext');
       this.currentIndex = settings.currentIndex;
-      this.pageNow = Math.floor(settings.currentIndex / settings.perPageSlide);
     }
 
     SlideAct.prototype = {
@@ -29,7 +28,6 @@
         this.container.css({
           'width': (settings.imgWidth + settings.imgMargin * 2) * settings.perPageSlide + 'px'
         });
-
         this.list.css({
           'margin': settings.imgMargin + 'px'
         });
@@ -52,40 +50,33 @@
         this.container.append(slideResult);
       },
       showSlide: function (index) {
-        this.list.css('border', 'none').hide();
-        this.list.eq(index).css('border', '2px dotted #3f2d27');
+        this.list.hide();
+        this.activeSlide(index);
+        index = (Math.floor(index / settings.perPageSlide) + 1) * settings.perPageSlide - 1;
         for (i = 0; i < settings.perPageSlide; i++) {
-          this.list.eq(index + i).show();
+          this.list.eq(index - i).show();
         }
       },
-      // activeSlide: function (index) {
-      //   this.list.eq(index).css('border', '2px dotted #3f2d27');
-      // },
-      getPage: function (index) {
-        this.pageNow = Math.floor((index - 1) / settings.perPageSlide);
-        if (this.pageNow !== Math.floor(this.currentIndex / settings.perPageSlide)) {
-          this.showSlide(index);
-        };
+      activeSlide: function (index) {
+        this.list.css('border', 'none');
+        this.list.eq(index).css('border', '2px dotted #3f2d27');
       },
       nextSlide: function () {
         this.currentIndex += settings.perPageSlide;
         this.checkIndex();
-        this.getPage(this.currentIndex);
-        // this.activeSlide(this.currentIndex);
+        this.showSlide(this.currentIndex);
         this.checkonSlide();
       },
       prevSlide: function () {
-
         this.currentIndex -= settings.perPageSlide;
         this.checkIndex();
-        this.getPage(this.currentIndex);
-        // this.activeSlide(this.currentIndex);
+        this.showSlide(this.currentIndex);
         this.checkonSlide();
       },
       /* Check currentIndex */
       checkIndex: function () {
-        if (this.currentIndex <= -1) {
-          this.currentIndex = this.amount - 1;
+        if (this.currentIndex < 0) {
+          this.currentIndex = this.amount;
         };
         if (this.currentIndex > this.amount) {
           this.currentIndex = 0;
@@ -106,6 +97,10 @@
   $(function () {
     let mainSlide, thumbnailSlide;
     let slideImgData = [{
+        "id": 0,
+        "src": "http://placehold.it/500/2A6041/ffffff&text=Zero"
+      },
+      {
         "id": 1,
         "src": "http://placehold.it/500/2A6041/ffffff&text=One"
       },
@@ -147,6 +142,10 @@
       }
     ];
     let thumbnailImgData = [{
+        "id": 0,
+        "src": "http://placehold.it/180/2A6041/ffffff&text=Zero"
+      },
+      {
         "id": 1,
         "src": "http://placehold.it/180/2A6041/ffffff&text=One"
       },
@@ -195,10 +194,8 @@
       imgWidth: 500,
       imgMargin: 5,
       onSlide: function (currentIndex) {
-        if (thumbnailSlide.currentIndex !== mainSlide.currentIndex) {
-          thumbnailSlide.showSlide(currentIndex);
-          thumbnailSlide.currentIndex = currentIndex;
-        }
+        thumbnailSlide.showSlide(currentIndex);
+        thumbnailSlide.currentIndex = currentIndex;
       }
     });
     $('#thumbnail').slideshow({
@@ -209,10 +206,8 @@
       imgWidth: 180,
       imgMargin: 5,
       onSlide: function (currentIndex) {
-        if (thumbnailSlide.currentIndex !== mainSlide.currentIndex) {
-          mainSlide.showSlide(currentIndex);
-          mainSlide.currentIndex = currentIndex;
-        }
+        mainSlide.showSlide(currentIndex);
+        mainSlide.currentIndex = currentIndex;
       }
     });
 
