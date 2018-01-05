@@ -2,30 +2,31 @@ body {
   font: 13px/1.231 arial, helvetica, clean, sans-serif;
   background-color: #d8f2da;
 }
-ul > li{
-  display: inline-block;
-}
-ul > li > img{
-  display: block;
-}
-.slideshow-content, .slideshow-title {
+.slideshow {
   text-align: center;
 }
-#thumbnail li:hover{
-  cursor: pointer;
+.slideshow-title {
+  text-align: center;
 }
-.slideshow-list {
-  display: inline-flex;
+.slideshow-list,
+.slideshow-thumbnail-item {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
-.button{
+.slideshow-thumbnail {
+  display: inline-flex;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.slideshow-thumbnail-item {
+  display: inline-flex;
+}
+.button {
   padding: 10px;
   border: 2px solid #ddd;
   border-radius: 6px;
   background-color: #737172;
-  color:#d8f0f2;
+  color: #d8f0f2;
   cursor: pointer;
 }

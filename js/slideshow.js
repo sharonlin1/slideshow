@@ -40,14 +40,22 @@
           evt.preventDefault();
           slide.prevSlide();
         });
+        this.list.click(function (evt) {
+          let clickIndex = $(this).find('img').data("id");
+          slide.activeSlide(clickIndex);
+          slide.imgClick(clickIndex);
+        });
       },
       getSlideData: function () {
         let slideResult = '';
         for (let i = 0; i < settings.slideList.length; i++) {
           let temp = settings.slideList[i].src;
-          slideResult += '<li><img src="' + temp + '"></li>';
+          slideResult += '<li><img src="' + temp + '" + data-id="' + i + '"></li>';
         }
         this.container.append(slideResult);
+      },
+      imgClick: function (clickIndex) {
+        settings.onSlide(clickIndex);
       },
       showSlide: function (index) {
         this.list.hide();
@@ -59,7 +67,7 @@
       },
       activeSlide: function (index) {
         this.list.css('border', 'none');
-        this.list.eq(index).css('border', '2px dotted #3f2d27');
+        this.list.eq(index).css('border', '3px dotted #3f2d27');
       },
       nextSlide: function () {
         this.currentIndex += settings.perPageSlide;
@@ -73,7 +81,6 @@
         this.showSlide(this.currentIndex);
         this.checkonSlide();
       },
-      /* Check currentIndex */
       checkIndex: function () {
         if (this.currentIndex < 0) {
           this.currentIndex = this.amount;
@@ -190,7 +197,7 @@
       selector: '#slideshow',
       slideList: slideImgData,
       perPageSlide: 1,
-      currentIndex: 0,
+      currentIndex: 1,
       imgWidth: 500,
       imgMargin: 5,
       onSlide: function (currentIndex) {
@@ -202,7 +209,7 @@
       selector: '#thumbnail',
       slideList: thumbnailImgData,
       perPageSlide: 4,
-      currentIndex: 0,
+      currentIndex: 1,
       imgWidth: 180,
       imgMargin: 5,
       onSlide: function (currentIndex) {
