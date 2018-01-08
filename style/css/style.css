@@ -15,12 +15,21 @@ ul > li > img {
 #thumbnail li:hover {
   cursor: pointer;
 }
+#slideshow,
+#thumbnail {
+  margin: 0 auto;
+  overflow: hidden;
+}
 .slideshow-list {
   display: inline-flex;
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
+  position: relative;
+}
+.slideshow-list .active {
+  border: 3px dotted #3f2d27;
 }
 .button {
   padding: 10px;

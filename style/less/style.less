@@ -2,30 +2,46 @@ body {
   font: 13px/1.231 arial, helvetica, clean, sans-serif;
   background-color: #d8f2da;
 }
-ul > li{
+
+ul>li {
   display: inline-block;
 }
-ul > li > img{
+
+ul>li>img {
   display: block;
 }
-.slideshow-content, .slideshow-title {
+
+.slideshow-content,.slideshow-title {
   text-align: center;
 }
-#thumbnail li:hover{
+
+#thumbnail li:hover {
   cursor: pointer;
 }
+
+#slideshow,#thumbnail {
+  margin: 0 auto;
+  overflow: hidden;
+}
+
 .slideshow-list {
   display: inline-flex;
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
+  position: relative;
+  .active{
+    border: 3px dotted #3f2d27;
+  }
 }
-.button{
+
+
+.button {
   padding: 10px;
   border: 2px solid #ddd;
   border-radius: 6px;
   background-color: #737172;
-  color:#d8f0f2;
+  color: #d8f0f2;
   cursor: pointer;
 }
